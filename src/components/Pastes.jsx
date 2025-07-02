@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFromPastes } from '../redux/pasteSlice';
 import toast from 'react-hot-toast';
+import { NavLink } from 'react-router-dom';
 
 const Pastes = () => {
   
@@ -38,8 +39,16 @@ const Pastes = () => {
                     {paste.content}
                   </div>
                   <div className='flex flex-row p-2 place-content-evenly'>
-                    <button>View</button>
-                    <button>Edit</button>
+                    <button>
+                      <NavLink to={`/pastes/${paste._id}`} >
+                        View
+                      </NavLink>
+                    </button>
+                    <button>
+                      <NavLink to={`/?pasteId=${paste?._id}`}>
+                        Edit
+                      </NavLink>
+                    </button>
                     <button onClick={()=>{deletePaste(paste)}}>Delete</button>
                     <button onClick={()=>{
                       navigator.clipboard.writeText(paste.content);
